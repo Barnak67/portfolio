@@ -1,20 +1,5 @@
 const nav = document.querySelector("nav");
 
-const navToggle = document.getElementById("navToggle");
-const navLinksMenu = document.getElementById("navLinks");
-
-navToggle.addEventListener("click", () => {
-    navLinksMenu.classList.toggle("open");
-    navToggle.classList.toggle("active");
-});
-
-navLinksMenu.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinksMenu.classList.remove("open");
-        navToggle.classList.remove("active");
-    });
-});
-
 nav.addEventListener("mousemove",(e)=>{
 
     const rect = nav.getBoundingClientRect();
