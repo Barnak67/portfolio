@@ -27,6 +27,26 @@ window.addEventListener("scroll", () => {
 const navLinks = document.querySelectorAll(".nav-links a");
 const sections = document.querySelectorAll("section[id]");
 
+const navMain = document.getElementById("navMain");
+const navLogoBtn = document.getElementById("navLogoBtn");
+
+navLogoBtn.addEventListener("click", () => {
+    navMain.classList.toggle("expanded");
+});
+
+navLogoBtn.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" || e.key === " "){
+        e.preventDefault();
+        navMain.classList.toggle("expanded");
+    }
+});
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        navMain.classList.remove("expanded");
+    });
+});
+
 window.addEventListener("scroll", () => {
 
     let currentSection = "";
