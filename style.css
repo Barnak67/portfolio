@@ -158,6 +158,28 @@ nav{
 }
 
 
+/* HAMBURGER TOGGLE (mobile only, hidden on desktop) */
+
+.nav-toggle{
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+    border-radius:50%;
+
+    background:none;
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
 /* MORE */
 
 
@@ -750,4 +772,152 @@ section h2{
 
     padding-bottom:120px;
 
+}
+/* =========================
+   RESPONSIVE / MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    /* Shrink hero padding + text so it doesn't dominate the screen */
+    .hero{
+        padding:110px 20px 70px;
+    }
+
+    .hero h1{
+        font-size:clamp(42px,13vw,70px);
+    }
+
+    .hero h2{
+        font-size:19px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    /* Sections: less side padding on narrow screens */
+    section{
+        padding:60px 6%;
+    }
+
+    section h2{
+        font-size:30px;
+    }
+
+    /* NAVBAR: collapse into a compact bar with a hamburger */
+    nav{
+        top:14px;
+        width:calc(100% - 28px);
+        max-width:420px;
+        gap:8px;
+    }
+
+    .nav-main{
+        flex:1;
+        justify-content:space-between;
+        padding:0 10px 0 14px;
+    }
+
+    .nav-logo{
+        width:42px;
+        height:42px;
+        font-size:20px;
+    }
+
+    .nav-divider{
+        display:none;
+    }
+
+    .nav-toggle{
+        display:flex;
+    }
+
+    /* Links become a dropdown panel instead of an inline pill */
+    .nav-links{
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        gap:4px;
+
+        position:fixed;
+        top:80px;
+        left:14px;
+        right:14px;
+
+        background:rgba(5,10,18,.95);
+        backdrop-filter:blur(20px);
+        -webkit-backdrop-filter:blur(20px);
+
+        border:1px solid rgba(59,130,246,.16);
+        border-radius:20px;
+
+        padding:10px;
+
+        box-shadow:0 10px 35px rgba(0,0,0,.45);
+    }
+
+    .nav-links.open{
+        display:flex;
+    }
+
+    .nav-links a{
+        text-align:center;
+        padding:13px 17px;
+    }
+
+    /* Contact pill: icons only, no labels, so it fits */
+    .nav-contact{
+        height:52px;
+        padding:0 6px;
+    }
+
+    .nav-contact a{
+        width:42px;
+        height:42px;
+    }
+
+    .nav-contact small{
+        display:none;
+    }
+
+    /* Cards stack cleanly */
+    .cards{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    /* Education / experience: date drops under the title instead of squeezing beside it */
+    .edu-top,
+    .exp-top{
+        flex-direction:column;
+        gap:4px;
+    }
+
+    .edu-degree,
+    .exp-title{
+        font-size:20px;
+    }
+}
+
+@media (max-width:420px){
+
+    nav{
+        width:calc(100% - 20px);
+    }
+
+    .hero{
+        padding:100px 16px 60px;
+    }
+
+    .hero-tag{
+        letter-spacing:3px;
+        font-size:13px;
+    }
+
+    .btn,
+    .btn-outline{
+        padding:14px 24px;
+        font-size:15px;
+    }
 }
