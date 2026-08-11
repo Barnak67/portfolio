@@ -1142,3 +1142,10 @@ section h2{
         font-size:15px;
     }
 }
+
+.project-icon img {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    display: block;
+}
