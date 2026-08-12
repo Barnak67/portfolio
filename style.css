@@ -982,11 +982,25 @@ section h2{
 
 @media (max-width:768px){
 
-    /* Swap the desktop backdrop for the mobile-optimized image.
-       `fixed` attachment is dropped too - mobile browsers handle
-       fixed backgrounds poorly, causing jank/repaint issues while
-       scrolling. */
+    /* The mobile backdrop is applied via body::before (fixed to the
+       viewport) instead of body's own background. Putting it directly
+       on body with background-size:cover would size the image to
+       cover the ENTIRE scrollable page height (not just the screen),
+       stretching it far beyond its natural proportions on a long page.
+       A fixed, viewport-sized pseudo-element keeps the framing correct
+       and still avoids the scroll jank that background-attachment:fixed
+       causes on mobile browsers. */
     body{
+        background:none;
+    }
+
+    body::before{
+        content:"";
+
+        position:fixed;
+        inset:0;
+        z-index:-1;
+
         background:
         linear-gradient(
             rgba(0,0,0,.45),
@@ -997,7 +1011,6 @@ section h2{
         background-size:cover;
         background-position:center;
         background-repeat:no-repeat;
-        background-attachment:scroll;
     }
 
     /* Shrink hero padding + text so it doesn't dominate the screen */
