@@ -8,6 +8,12 @@
 
 html{
     scroll-behavior:smooth;
+
+    /* Fallback shown during the rubber-band overscroll bounce past
+       the top/bottom edges - without this it defaults to white. */
+    background-color:#050505;
+
+    overscroll-behavior:none;
 }
 
 /* BODY */
