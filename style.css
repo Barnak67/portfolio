@@ -14,6 +14,7 @@ html{
     background-color:#050505;
 
     overscroll-behavior:none;
+    overscroll-behavior-y:none;
 }
 
 /* BODY */
@@ -35,6 +36,10 @@ body{
     background-position:center;
     background-repeat:no-repeat;
     background-attachment:fixed;
+    background-color:#050505;
+
+    overscroll-behavior:none;
+    overscroll-behavior-y:none;
 
 }
 
@@ -1012,7 +1017,7 @@ section h2{
             rgba(0,0,0,.45),
             rgba(0,0,0,.45)
         ),
-        url("assets/backgrounds/mobile_version.png");
+        url("assets/backgrounds/mobBack.png");
 
         background-size:cover;
         background-position:center;
