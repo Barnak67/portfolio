@@ -971,10 +971,10 @@ section h2{
     font-size:24px;
     font-weight:700;
 
-    color:#60a5fa;
+    color:#00f7bd;
 
     text-decoration:underline;
-    text-decoration-color:rgba(96,165,250,.45);
+    text-decoration-color:#00f7bd;
     text-decoration-thickness:2px;
     text-underline-offset:6px;
 
