@@ -76,3 +76,66 @@ window.addEventListener("scroll", () => {
     });
 
 });
+
+/* =========================
+   COPY EMAIL ON CLICK
+========================= */
+
+const copyEmailBtn = document.getElementById("copyEmail");
+
+const toast = document.createElement("div");
+toast.className = "toast";
+toast.setAttribute("role", "status");
+toast.setAttribute("aria-live", "polite");
+document.body.appendChild(toast);
+
+let toastTimer;
+
+function showToast(message){
+    toast.textContent = message;
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2200);
+}
+
+function fallbackCopy(text){
+    // For browsers / contexts where navigator.clipboard isn't available
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    temp.style.position = "fixed";
+    temp.style.opacity = "0";
+    document.body.appendChild(temp);
+    temp.select();
+
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch(err) { ok = false; }
+
+    document.body.removeChild(temp);
+    return ok;
+}
+
+copyEmailBtn.addEventListener("click", async (e) => {
+
+    // Stop the mailto: link from opening the mail app
+    e.preventDefault();
+
+    const email = copyEmailBtn.dataset.email;
+    let copied = false;
+
+    try {
+        if(navigator.clipboard && window.isSecureContext){
+            await navigator.clipboard.writeText(email);
+            copied = true;
+        }else{
+            copied = fallbackCopy(email);
+        }
+    }catch(err){
+        copied = fallbackCopy(email);
+    }
+
+    showToast(copied ? "Email copied: " + email : "Couldn't copy. Email: " + email);
+
+});

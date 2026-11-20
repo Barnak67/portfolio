@@ -960,20 +960,94 @@ section h2{
     flex-wrap:wrap;
 }
 
+/* Certificate titles are links to the PDF, so they look clickable
+   at rest (blue + underline + icon), not only on hover. This also
+   matters on touch screens, which have no hover. */
 .cert-name{
+    display:inline-flex;
+    align-items:baseline;
+    gap:10px;
+
     font-size:24px;
     font-weight:700;
 
-    color:#fff;
+    color:#60a5fa;
 
-    text-decoration:none;
+    text-decoration:underline;
+    text-decoration-color:rgba(96,165,250,.45);
+    text-decoration-thickness:2px;
+    text-underline-offset:6px;
+
+    cursor:pointer;
 
     transition:.3s ease;
 }
 
-.cert-name:hover{
-    color:#60a5fa;
-    text-decoration:underline;
+.cert-name::after{
+    content:"\f08e";
+    font-family:"Font Awesome 6 Free";
+    font-weight:900;
+    font-size:.6em;
+
+    opacity:.8;
+
+    transition:.3s ease;
+}
+
+.cert-name:hover,
+.cert-name:focus-visible{
+    color:#93c5fd;
+    text-decoration-color:#93c5fd;
+}
+
+.cert-name:hover::after,
+.cert-name:focus-visible::after{
+    opacity:1;
+    transform:translate(2px,-2px);
+}
+
+.cert-name:focus-visible{
+    outline:2px solid #60a5fa;
+    outline-offset:6px;
+    border-radius:4px;
+}
+
+/* TOAST (email copied) */
+
+.toast{
+    position:fixed;
+    bottom:30px;
+    left:50%;
+
+    transform:translate(-50%,20px);
+
+    padding:12px 22px;
+
+    background:rgba(5,10,18,.92);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    border:1px solid rgba(59,130,246,.35);
+    border-radius:40px;
+
+    color:#fff;
+    font-size:14px;
+    font-weight:500;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.45);
+
+    opacity:0;
+    pointer-events:none;
+
+    transition:opacity .3s ease, transform .3s ease;
+
+    z-index:2000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
 }
 
 .cert-date{
