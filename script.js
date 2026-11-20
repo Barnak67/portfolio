@@ -79,9 +79,8 @@ window.addEventListener("scroll", () => {
 
 /* =========================
    COPY EMAIL ON CLICK
+   (any element with a data-email attribute: nav icon, footer button)
 ========================= */
-
-const copyEmailBtn = document.getElementById("copyEmail");
 
 const toast = document.createElement("div");
 toast.className = "toast";
@@ -117,25 +116,57 @@ function fallbackCopy(text){
     return ok;
 }
 
-copyEmailBtn.addEventListener("click", async (e) => {
+document.querySelectorAll("[data-email]").forEach(btn => {
 
-    // Stop the mailto: link from opening the mail app
-    e.preventDefault();
+    btn.addEventListener("click", async (e) => {
 
-    const email = copyEmailBtn.dataset.email;
-    let copied = false;
+        // Stop the mailto: link from opening the mail app
+        e.preventDefault();
 
-    try {
-        if(navigator.clipboard && window.isSecureContext){
-            await navigator.clipboard.writeText(email);
-            copied = true;
-        }else{
+        const email = btn.dataset.email;
+        let copied = false;
+
+        try {
+            if(navigator.clipboard && window.isSecureContext){
+                await navigator.clipboard.writeText(email);
+                copied = true;
+            }else{
+                copied = fallbackCopy(email);
+            }
+        }catch(err){
             copied = fallbackCopy(email);
         }
-    }catch(err){
-        copied = fallbackCopy(email);
-    }
 
-    showToast(copied ? "Email copied: " + email : "Couldn't copy. Email: " + email);
+        showToast(copied ? "Email copied: " + email : "Couldn't copy. Email: " + email);
+
+    });
 
 });
+
+
+/* =========================
+   SECTION FADE-IN (once per section)
+========================= */
+
+if(
+    "IntersectionObserver" in window &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+){
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+            }
+        });
+
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll("main section:not(.hero)").forEach(section => {
+        section.classList.add("reveal");
+        revealObserver.observe(section);
+    });
+
+}
